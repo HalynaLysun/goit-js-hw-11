@@ -16,7 +16,6 @@ export function searchImages(value, loader, form) {
                 safesearch: true
             })
     const LINK = `${URI}?${PARAMS}`
-    console.log(LINK)
             
             return fetch (LINK)
                 .then(response => {

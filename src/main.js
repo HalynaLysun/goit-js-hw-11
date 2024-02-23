@@ -1,7 +1,3 @@
-// вся логіка документу
-
-// 1. Імпортувати функції  HTTP - запитів
-// 2. Імпортувати функції розмітки карток зображень
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import cross from '../src/img/bi_x-octagon.svg'
@@ -20,11 +16,10 @@ formEl.addEventListener('submit', (event) => {
 
     listEl.innerHTML = ''
 
-    loaderEl.classList.remove('is-hidden')
+    const value = event.currentTarget.image_name.value
 
-    const value = event.currentTarget.image_name.value.trim()
-
-    if (value !== '') {
+    if (value.trim() !== '') {
+        loaderEl.classList.remove('is-hidden')
         setTimeout(() => {
             searchImages(value, loaderEl, formEl)
                 .then(data => {

@@ -5,22 +5,22 @@ import 'simplelightbox/dist/simple-lightbox.min.css'
 export function showImages(images, gallery) {
     gallery.innerHTML = images.map(img =>
                 `<li>
-                <a href="${img.largeImageURL}"><img src="${img.webformatURL}" alt="${img.tags}"></a>
-                <ul>
+                <a href="${img.largeImageURL}"><img class="gallery-img" src="${img.webformatURL}" alt="${img.tags}"></a>
+                <ul class="gallery-list">
                     <li>
-                        <h>Likes</h>
+                        <h2>Likes</h2>
                         <p>${img.likes}</p>
                     </li>
                     <li>
-                        <h>Views</h>
+                        <h2>Views</h2>
                         <p>${img.views}</p>
                     </li>                    
                     <li>
-                        <h>Comments</h>
+                        <h2>Comments</h2>
                         <p>${img.comments}</p>
                     </li>                    
                     <li>
-                        <h>Downloads</h>
+                        <h2>Downloads</h2>
                         <p>${img.downloads}</p>
                     </li>
                 </ul>
