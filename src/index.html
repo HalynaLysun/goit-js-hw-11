@@ -10,12 +10,23 @@
   <body>
 
     <section>
-      <h1>Example page title</h1>
 
-      <img src="./img/javascript.svg" alt="" />
+      <form class="form">
+        <label>
+          <input class="input" type="text" name="image_name"/>
+        </label>
+ 
+        <button class="button" type="submit">Search</button>
+      </form>
+
+      <span class="loader is-hidden">Loading</span>
+
+      <ul class="gallery"></ul>
+      
+
     </section>
 
-
+    <script type="module" src="./js/pixabay-api.js"></script>
     <script type="module" src="./main.js"></script>
   </body>
 </html>
