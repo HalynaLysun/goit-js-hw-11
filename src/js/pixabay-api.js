@@ -4,25 +4,9 @@
 // При кліку на маленьке зображення в галереї відкривається його збільшена версія у модальному вікні з використанням бібліотеки SimpleLightbox
 // Елементи на сторінці стилізовані згідно з макетом(або власні стилі)
 
-import iziToast from 'izitoast'
-import 'izitoast/dist/css/iziToast.min.css'
-import cross from '../img/bi_x-octagon.svg'
 
 
-const formEl = document.querySelector('.form')
-const loaderEl = document.querySelector('.loader')
-const listEl = document.querySelector('.gallery')
-
-
-formEl.addEventListener('submit', (event) => {
-    event.preventDefault()
-
-    listEl.innerHTML = ''
-
-    loaderEl.classList.remove('is-hidden')
-
-        const value = event.currentTarget.image_name.value
-    if (value.trim() !== '') {
+export function searchImages(value, loader, form) {
             const URI = 'https://pixabay.com/api/'
             const PARAMS = new URLSearchParams({
                 key: '42515030-f0931f035bd772c998b8c15c1',
@@ -31,9 +15,9 @@ formEl.addEventListener('submit', (event) => {
                 orientation: 'horizontal',
                 safesearch: true
             })
-            const LINK = `${URI}?${PARAMS}`
+    const LINK = `${URI}?${PARAMS}`
+    console.log(LINK)
             
-        function searchImages() {
             return fetch (LINK)
                 .then(response => {
                 if (!response.ok) {
@@ -46,55 +30,10 @@ formEl.addEventListener('submit', (event) => {
                     alert('Error while searching images!')
                 })
                 .finally(() => {
-                    loaderEl.classList.add('is-hidden')
-                    formEl.reset()
+                    loader.classList.add('is-hidden')
+                    form.reset()
                 })
         }
-
-        setTimeout(() => {
-            searchImages().then(data => {
-                if (data.hits.length === 0) {
-                iziToast.error({
-                    title: '',
-                    message: 'Sorry, there are no images matching your search query. Please try again!',
-                    class: 'popup-message',
-                    theme: 'dark',
-                    backgroundColor: '#ef4040',
-                    messageColor: '#fff',
-                    iconUrl: cross,
-                    position: 'topRight',
-                    pauseOnHover: true,
-                    timeout: 3000,
-                });   
-            }
-            const images = data.hits.slice(0, 15)
-
-            listEl.innerHTML = images.map(img =>
-                `<li>
-                <a href="${img.largeImageURL}"><img src="${img.webformatURL}" alt="${img.tags}"></a>
-                <ul>
-                    <li>
-                        <h>Likes</h>
-                        <p>${img.likes}</p>
-                    </li>
-                    <li>
-                        <h>Views</h>
-                        <p>${img.views}</p>
-                    </li>                    
-                    <li>
-                        <h>Comments</h>
-                        <p>${img.comments}</p>
-                    </li>                    
-                    <li>
-                        <h>Downloads</h>
-                        <p>${img.downloads}</p>
-                    </li>
-                </ul>
-                </li>`).join('')
-            })
-        }, 2000)
-       }
-})
 
 // + 1. Повісити слухача на форму з подією сабміт
 // + 2. додати перевірку вмісту текстового поля на наявність порожнього рядка
