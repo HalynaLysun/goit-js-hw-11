@@ -85,7 +85,6 @@ body {
   min-width: 272px;
   height: 40px;
   box-sizing: border-box;
-  cursor: pointer;
 }
 
 .input:hover {
